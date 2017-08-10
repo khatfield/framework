@@ -145,7 +145,7 @@ class HerbertServiceProvider extends ServiceProvider {
             'username' => DB_USER,
             'password' => DB_PASSWORD,
             'charset' => DB_CHARSET,
-            'collation' => DB_COLLATE ?: $wpdb->collate,
+            'collation' => DB_COLLATE ?: 'utf8_general_ci',
             'prefix' => $wpdb->prefix
         ]);
 
