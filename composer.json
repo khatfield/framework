@@ -1,6 +1,6 @@
 {
-  "name": "getherbert/herbert",
-  "description": "Herbert",
+  "name": "khatfield/herbert",
+  "description": "Herbert Framework - Updated Framework",
   "license": "MIT",
   "require": {
     "twig/twig": "~1.16",
