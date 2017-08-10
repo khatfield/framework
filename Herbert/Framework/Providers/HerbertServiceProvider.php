@@ -23,7 +23,7 @@ class HerbertServiceProvider extends ServiceProvider {
             'env',
             defined('HERBERT_ENV') ? HERBERT_ENV
                 : (defined('WP_DEBUG') ? 'local'
-                    : 'production')
+                : 'production')
         );
 
         $this->app->instance(
@@ -74,6 +74,16 @@ class HerbertServiceProvider extends ServiceProvider {
         $this->app->alias(
             'shortcode',
             'Herbert\Framework\Shortcode'
+        );
+
+        $this->app->instance(
+            'action',
+            $this->app->make('Herbert\Framework\Action', ['app' => $this->app])
+        );
+
+        $this->app->alias(
+            'action',
+            'Herbert\Framework\Action'
         );
 
         $this->app->instance(

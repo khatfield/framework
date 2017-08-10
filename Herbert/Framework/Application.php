@@ -280,6 +280,11 @@ class Application extends \Illuminate\Container\Container implements \Illuminate
         );
 
         $this->loadPluginX(
+            'action',
+            array_get($config, 'actions', [])
+        );
+
+        $this->loadPluginX(
             'widget',
             array_get($config, 'widgets', [])
         );
@@ -522,6 +527,7 @@ class Application extends \Illuminate\Container\Container implements \Illuminate
                 'enqueue',
                 'panel',
                 'shortcode',
+                'action',
                 'widget'
             ]);
         }
@@ -560,6 +566,7 @@ class Application extends \Illuminate\Container\Container implements \Illuminate
                 'enqueue',
                 'panel',
                 'shortcode',
+                'action',
                 'widget'
             ]);
         }
@@ -621,6 +628,7 @@ class Application extends \Illuminate\Container\Container implements \Illuminate
                 'enqueue',
                 'panel',
                 'shortcode',
+                'action',
                 'widget'
             ]);
         }
