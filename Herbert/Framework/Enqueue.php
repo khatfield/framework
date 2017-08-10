@@ -45,6 +45,10 @@ class Enqueue {
      */
     public function buildInclude($attrs, $footer)
     {
+        if(!isset($attrs['src'])){
+            $attrs['src'] = '';
+        }
+
         if (isset($attrs['filter']) && !empty($attrs['filter']))
         {
             $filterBy = key($attrs['filter']);
@@ -61,17 +65,15 @@ class Enqueue {
             }
         }
 
-//        if (substr($attrs['src'], 0, 2) !== "//")
-//        {
-//            $attrs['src'] = ltrim($attrs['src'], '/');
-//        }
-
-        if (pathinfo($attrs['src'], PATHINFO_EXTENSION) === 'css')
-        {
+        /**
+         * New option:
+         * - Pass wp-enqueue-media to enque scripts needed for media library
+         */
+        if($attrs['as'] == 'wp-enqueue-media') {
+            wp_enqueue_media();
+        } elseif (pathinfo($attrs['src'], PATHINFO_EXTENSION) === 'css') {
             wp_enqueue_style($attrs['as'], $attrs['src']);
-        }
-        else
-        {
+        } else {
             wp_enqueue_script($attrs['as'], $attrs['src'], [], false, $footer);
 
             if(isset($attrs['localize'])) {
