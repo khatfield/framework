@@ -332,4 +332,56 @@ class Enqueue {
         return array_search(get_post_type(), $filterWith) !== FALSE;
     }
 
+    /**
+     * Filters the post and checks for presence of Shortcodes
+     *
+     * @param $attrs
+     * @param $filterWith
+     *
+     * @return bool
+     */
+    public function filterShortcode($attrs, $filterWith)
+    {
+        global $post;
+
+        if($filterWith[0] === '*'){
+            return true;
+        }
+
+        foreach($filterWith as $filter){
+            if(is_a($post, 'WP_Post') && has_shortcode($post->post_content, $filter)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Filter the post based on searching the post content
+     * using stripos
+     *
+     * @param $attrs
+     * @param $filterWith
+     *
+     * @return bool
+     */
+    public function filterContent($attrs, $filterWith)
+    {
+        global $post;
+
+        if($filterWith[0] === '*'){
+            return true;
+        }
+
+        foreach($filterWith as $filter){
+            if(stripos($post->post_content, $filter) !== false){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 }
