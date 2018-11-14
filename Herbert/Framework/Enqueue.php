@@ -68,13 +68,26 @@ class Enqueue {
         /**
          * New option:
          * - Pass wp-enqueue-media to enque scripts needed for media library
+         * - include version if it is set
+         * - include deps if set
          */
+        $version = false;
+        $deps    = [];
+
+        if(isset($attrs['version'])) {
+            $version = $attrs['version'];
+        }
+
+        if(isset($attrs['deps'])) {
+            $deps = $attrs['deps'];
+        }
+
         if($attrs['as'] == 'wp-enqueue-media') {
             wp_enqueue_media();
         } elseif (pathinfo($attrs['src'], PATHINFO_EXTENSION) === 'css') {
-            wp_enqueue_style($attrs['as'], $attrs['src']);
+            wp_enqueue_style($attrs['as'], $attrs['src'], $deps, $version);
         } else {
-            wp_enqueue_script($attrs['as'], $attrs['src'], [], false, $footer);
+            wp_enqueue_script($attrs['as'], $attrs['src'], $deps, $version, $footer);
 
             if(isset($attrs['localize'])) {
                 wp_localize_script( $attrs['as'], $attrs['as'], $attrs['localize'] );
